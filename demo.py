@@ -35,7 +35,7 @@ def torch_wrapper(x):
     return pred
 
 # --- Deep View Parameters ----
-batch_size = 32
+batch_size = 64
 max_samples = 500
 data_shape = (64,)
 resolution = 100
@@ -44,11 +44,11 @@ lam = 0.64
 cmap = 'tab10'
 # to make shure deepview.show is blocking,
 # disable interactive mode
-interactive = False
+interactive = True
 title = 'Forest - MNIST'
 
 deepview = DeepView(pred_wrapper, classes, max_samples, batch_size, data_shape, 
 	N, lam, resolution, cmap, interactive, title)
 
-deepview.add_samples(data[:50], target[:50])
+deepview.add_samples(data[:10], target[:10])
 deepview.show()

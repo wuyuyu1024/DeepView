@@ -1,5 +1,5 @@
 from deepview.embeddings import init_umap, init_inv_umap
-from deepview.fisher_metric import calculate_fisher
+from deepview.fisher_metric_GPU import calculate_fisher
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl

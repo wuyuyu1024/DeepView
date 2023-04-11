@@ -16,6 +16,8 @@ from scipy.spatial import Delaunay
 from scipy.sparse import csr_matrix, eye
 from scipy.sparse.linalg import spsolve as lin_solve
 
+import matplotlib.pyplot as plt
+
 SMOOTH_K_TOLERANCE = 1e-5
 MIN_K_DIST_SCALE = 1e-3
 NPY_INFINITY = np.inf
@@ -182,7 +184,7 @@ def smooth(y_,H_,nn_,itrs,in_place=True):
             y_a = y_c
         return y_a
 
-#@jit(parallel=True)
+@jit(parallel=True)
 def select_neighbors(candidates):
         n_sets, n_select, n_neighbors = candidates.shape[0], candidates.shape[1], candidates.shape[2]
         
@@ -326,6 +328,12 @@ class StochasticEmbedding(BaseEstimator):
         self._centroied_neighbors = neighbors_search.kneighbors(self._centroieds, n_neighbors=self._n_neighbors, return_distance=False)
         self._triangolation = Delaunay(self._centroieds)
         
+        # print('debugingggggggg')
+        # plt.triplot(self._centroieds[:,0], self._centroieds[:,1], self._triangolation.simplices)
+        # plt.plot(self._centroieds[:,0], self._centroieds[:,1], 'o')
+        # plt.show()
+
+
         if self.verbose:
             print("compute sigma")
         """Ynn = neighbors_search.kneighbors(X, n_neighbors=self._n_neighbors, return_distance=False)[:,1:]
